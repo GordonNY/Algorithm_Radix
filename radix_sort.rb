@@ -1,3 +1,5 @@
+require 'benchmark'
+
 def array_sort(unsorted_arr, flag=false, count=0)
 	
 	if flag
@@ -30,9 +32,13 @@ def array_sort(unsorted_arr, flag=false, count=0)
 end
 
 
-arr = 100.times.map{ 2 + Random.rand(1000) } 
-sorted_arr = array_sort(arr)
-puts sorted_arr.inspect
+arr = 1000000.times.map{ 20 + Random.rand(1000) } 
+
+Benchmark.bmbm do |x|
+  x.report("sort") { sorted_arr = array_sort(arr) }
+end
+
+# puts sorted_arr.inspect
 
 
 
